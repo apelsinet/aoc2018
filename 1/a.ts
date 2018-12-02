@@ -1,8 +1,8 @@
+import { compose } from 'fp-ts/lib/function';
 import * as fs from 'fs';
+import * as R from 'ramda';
+const input: string = fs.readFileSync('./input', 'utf8');
 
-const sum = (acc: number, cur: number) => acc + cur;
-const start: number = 0;
-const input: string = fs.readFileSync('./1/a.input.txt', 'utf8');
-const xs: Array<number> = input.split('\n').map(Number);
+const output = compose(R.reduce(R.add, 0), R.map(Number), R.split('\n'))(input);
 
-console.log(xs.reduce(sum, start));
+console.log(output);
